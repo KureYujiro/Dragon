@@ -146,6 +146,7 @@ public class DragonsBreath extends FireAbility{
 			}
 
 			this.origin = player.getEyeLocation();
+			FireAbility.playFirebendingSound(origin);
 			this.dir = origin.getDirection().normalize();
 
 			arbitraryangleincrement+=5;

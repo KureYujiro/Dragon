@@ -28,7 +28,6 @@ public class DragonsBolt extends LightningAbility{
 	private double speed, damage, range, hitbox;
 
 	//Set variables
-	private Boolean hasbluefire;
 	private Location origin, locleft, locright, loc, endloc, closestleft, closestright;
 	private Vector dir;
 
@@ -38,6 +37,7 @@ public class DragonsBolt extends LightningAbility{
 	private Entity e;
 	private Player target;
 	private BendingPlayer btarget;
+	private double distance;
 
 
 	public DragonsBolt(Player player) {
@@ -65,7 +65,6 @@ public class DragonsBolt extends LightningAbility{
 
 		//Set variables
 
-		this.hasbluefire = bPlayer.hasElement(Element.BLUE_FIRE);
 		this.origin = player.getEyeLocation();
 		this.dir = origin.getDirection();
 		this.loc = origin.clone().add(dir);
@@ -89,6 +88,8 @@ public class DragonsBolt extends LightningAbility{
 		leftarcs.add(closestleft);
 		this.rightarcs = new ArrayList<Location>();
 		rightarcs.add(closestright);
+		
+		this.distance = 0;
 	}
 
 	@Override
@@ -123,8 +124,9 @@ public class DragonsBolt extends LightningAbility{
 			this.remove();
 		}
 
+		distance = loc.distance(origin);
 
-		if (loc.distance(origin) > range) {
+		if (distance > range) {
 			this.remove();
 		}
 
@@ -133,6 +135,8 @@ public class DragonsBolt extends LightningAbility{
 		}
 
 		loc.add(dir.clone().multiply(speed));
+		
+		LightningAbility.playLightningbendingSound(loc);
 
 		if (Methods.getAffected(loc, hitbox, player) != null) {
 			e = Methods.getAffected(loc, hitbox, player);
@@ -190,7 +194,7 @@ public class DragonsBolt extends LightningAbility{
 
 	public Location randomMidwayVertex(Location start, Location end) {
 		Vector midpoint = end.clone().subtract(start.clone()).toVector().multiply(0.5);
-		Vector random = new Vector (Math.random()-0.5, Math.random() - 0.5, Math.random() -0.5).normalize();
+		Vector random = new Vector (Math.random()-0.5, Math.random() - 0.5, Math.random() -0.5).normalize().multiply(Math.log(distance));
 		return (start.clone().add(midpoint).add(random));
 	}
 
@@ -202,7 +206,7 @@ public class DragonsBolt extends LightningAbility{
 		for (double d = 0 ; d < distance; d += 0.2) {
 			Location temploc = start.clone().add(normalised.clone().multiply(d));
 
-			ParticleEffect.REDSTONE.display(temploc, 1, 0.05, 0.05, 0.05, 0.005, new Particle.DustOptions(Color.fromRGB(1, 225, 255), 1));
+			ParticleEffect.REDSTONE.display(temploc, 1, 0, 0, 0, 0.005, new Particle.DustOptions(Color.fromRGB(1, 225, 255), 1));
 		}
 	}
 

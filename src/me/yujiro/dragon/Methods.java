@@ -61,10 +61,10 @@ public class Methods {
 
 	public static void playExplosion(Location loc, Double radius, long revert, Boolean explode) {
 		loc.getWorld().playSound(loc, Sound.ENTITY_GENERIC_EXPLODE, 1, 1);
-		ParticleEffect.EXPLOSION_NORMAL.display(loc, 5, radius, radius, radius);
+		ParticleEffect.EXPLOSION_NORMAL.display(loc, 20, radius, radius, radius);
 		if (explode) {
 			for (Block b : GeneralMethods.getBlocksAroundPoint(loc, radius)) {
-				if (b.getType().isSolid()) {
+				if (!b.getType().equals(Material.AIR) && !b.getType().equals(Material.WATER) && !b.getType().equals(Material.LAVA)) {
 					TempBlock tb = new TempBlock(b, Material.AIR);
 					tb.setRevertTime(revert);
 				}

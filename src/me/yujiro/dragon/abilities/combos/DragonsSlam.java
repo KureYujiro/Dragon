@@ -100,6 +100,9 @@ public class DragonsSlam extends FireAbility implements ComboAbility{
 
 		if (!hastouchedground) {
 			player.setFallDistance(0);
+			Location ploc = player.getLocation().clone().subtract(0,0.5,0);
+			Methods.playFireBall(GeneralMethods.getRightSide(ploc, 0.2), 0.5, 4, 1, hasbluefire);
+			Methods.playFireBall(GeneralMethods.getLeftSide(ploc, 0.2), 0.5, 4, 1, hasbluefire);
 		}
 
 		if (!hastouchedground && player.isOnGround()) {

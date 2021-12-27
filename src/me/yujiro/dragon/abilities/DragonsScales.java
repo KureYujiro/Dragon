@@ -3,6 +3,7 @@ package me.yujiro.dragon.abilities;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
@@ -31,7 +32,7 @@ public class DragonsScales extends FireAbility{
 	private ArrayList<Location> conelocs;
 	private ArrayList<Location> walllocs;
 
-	private Vector orthagonalleft, orthagonalright;
+	private Vector normalisedxzvector, orthagonalleft, orthagonalright;
 	
 	
 	public DragonsScales(Player player) {
@@ -141,12 +142,16 @@ public class DragonsScales extends FireAbility{
 			
 			for (double d = -shiftlength/2; d < shiftlength/2 ; d += 0.4) {
 				for (double h = 0; h < shiftheight; h+= 0.2) {
-					Location templocleft = player.getLocation().add(orthagonalleft.clone()).add(new Vector (0,h,0)).add(dir.clone().multiply(d));
-					Location templocright = player.getLocation().add(orthagonalright.clone()).add(new Vector (0,h,0)).add(dir.clone().multiply(d));
+		
+					
+					Location templocleft = player.getLocation().add(orthagonalleft.clone().multiply(currentshiftrange)).add(new Vector (0,h,0)).add(normalisedxzvector.clone().multiply(d));
+					Location templocright = player.getLocation().add(orthagonalright.clone().multiply(currentshiftrange)).add(new Vector (0,h,0)).add(normalisedxzvector.clone().multiply(d));
+	
 					walllocs.add(templocleft);
 					walllocs.add(templocright);
 					
 					if (!hasbluefire) {
+				
 						ParticleEffect.FLAME.display(templocleft, 1, 0.1, 0.1, 0.1);
 						ParticleEffect.FLAME.display(templocright, 1, 0.1, 0.1, 0.1);
 					}
@@ -184,8 +189,6 @@ public class DragonsScales extends FireAbility{
 	}
 	
 	
-	
-	
 	public void onClick() {
 		this.remove();
 	}
@@ -194,8 +197,11 @@ public class DragonsScales extends FireAbility{
 		if (!hasshifted) {
 			ProjectKorra.getCollisionInitializer().addLargeAbility(this);
 			hasshifted = true;
-			orthagonalleft = GeneralMethods.getOrthogonalVector(dir, 90, currentshiftrange).setY(0).normalize();
-			orthagonalright = GeneralMethods.getOrthogonalVector(dir, 270, currentshiftrange).setY(0).normalize();
+			double pitch = Math.toRadians(player.getLocation().getPitch());
+			double yaw = Math.toRadians(player.getLocation().getYaw());
+			normalisedxzvector = new Vector(-Math.cos(pitch) * Math.sin(yaw), 0, Math.cos(pitch) * Math.cos(yaw));
+			orthagonalleft = normalisedxzvector.clone().rotateAroundY(Math.toRadians(90));
+			orthagonalright = normalisedxzvector.clone().rotateAroundY(Math.toRadians(270));
 		}
 	}
 
@@ -215,7 +221,7 @@ public class DragonsScales extends FireAbility{
 
 	@Override
 	public String getInstructions() {
-		return "Left click to enable, click again to disable."; 
+		return "Left click to enable, click again to disable. Alternatively tap shift to protect your sides."; 
 	}
 
 }

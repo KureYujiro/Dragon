@@ -161,14 +161,16 @@ public class DragonsComet extends FireAbility{
 				origin = player.getEyeLocation();
 				dir = origin.getDirection();
 				loc = player.getEyeLocation().clone().add(dir.clone().multiply(cometradius + 1));
-				Methods.playFireBall(loc, cometradius, 20, 20, hasbluefire);
+				Methods.playFireBall(loc, cometradius, 20, 1, hasbluefire);
 			}
 			else {
+				FireAbility.playFirebendingSound(loc);
 				loc.add(dir.clone().multiply(speed));
-				Methods.playFireBall(loc, cometradius, 20, 20, hasbluefire);
-				ParticleEffect.SMOKE_NORMAL.display(loc, 3, 0.2, 0.2, 0.2);
+				Methods.playFireBall(loc, cometradius, 20, 1, hasbluefire);
+				ParticleEffect.SMOKE_NORMAL.display(loc, 5, 0.2, 0.2, 0.2);
 				
 				if (Methods.getAffected(loc, hitboxradius, player) != null) {
+					Methods.playExplosion(loc, cometradius, 5000, true);
 					DamageHandler.damageEntity(Methods.getAffected(loc, hitboxradius, player), damage, this);
 					this.remove();
 				}

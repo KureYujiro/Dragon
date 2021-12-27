@@ -4,9 +4,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityToggleGlideEvent;
+import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.player.PlayerAnimationEvent;
-import org.bukkit.event.player.PlayerArmorStandManipulateEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 
@@ -125,6 +126,35 @@ public class AbilityListener implements Listener {
 			return;
 		}
 	}
+	
+	
+	@EventHandler
+	public void onGlideIntoWall(EntityDamageEvent event) {
+		if (! (event.getEntity() instanceof Player)) {
+			return;
+		}
+		if ( ! event.getCause().equals(DamageCause.FLY_INTO_WALL)) {
+			return;
+		}
+		
+		Player player = (Player) event.getEntity();
+		BendingPlayer bPlayer = BendingPlayer.getBendingPlayer(player);
+
+		if (event.isCancelled() || bPlayer == null) {
+			return;
+		}
+		
+		if (CoreAbility.hasAbility(player, DragonsJet.class)) {
+			event.setCancelled(true);
+		}
+		
+		
+	}
+	
+	
+	
+	
+	
 }
 
 

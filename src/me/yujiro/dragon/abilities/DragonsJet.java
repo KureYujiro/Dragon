@@ -2,6 +2,7 @@ package me.yujiro.dragon.abilities;
 
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -22,10 +23,8 @@ import com.projectkorra.projectkorra.util.ParticleEffect;
 
 import me.yujiro.dragon.Dragon;
 import me.yujiro.dragon.Methods;
-import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
-
 
 public class DragonsJet extends FireAbility{
 
@@ -176,7 +175,7 @@ public class DragonsJet extends FireAbility{
 		if (dragonsjetstate == jetstate.LEAP) {
 			playParticles(false, true, jetstate.LEAP);
 			
-			if (player.getVelocity().getY() <= 0) {
+			if (player.getVelocity().getY() <= 0); {
 				dragonsjetstate = jetstate.FLY;
 			}
 		}
@@ -224,33 +223,33 @@ public class DragonsJet extends FireAbility{
 		if (position.equals(jetstate.FLY)) {
 			if (feet) {
 				if (!player.isSneaking()) {
-				Methods.playFireBall(GeneralMethods.getRightSide(ploc.clone().subtract(dir), 0.2), 0.5, 4, 5, bluefire);
-				Methods.playFireBall(GeneralMethods.getLeftSide(ploc.clone().subtract(dir), 0.2), 0.5, 4, 5, bluefire);
+				Methods.playFireBall(GeneralMethods.getRightSide(ploc.clone().subtract(dir), 0.2), 0.5, 4, 1, bluefire);
+				Methods.playFireBall(GeneralMethods.getLeftSide(ploc.clone().subtract(dir), 0.2), 0.5, 4, 1, bluefire);
 				}
 				else {
-					Methods.playFireBall(GeneralMethods.getRightSide(ploc, 0.2), 0.5, 4, 5, bluefire);
-					Methods.playFireBall(GeneralMethods.getLeftSide(ploc, 0.2), 0.5, 4, 5, bluefire);
+					Methods.playFireBall(GeneralMethods.getRightSide(ploc, 0.2), 0.5, 4, 1, bluefire);
+					Methods.playFireBall(GeneralMethods.getLeftSide(ploc, 0.2), 0.5, 4, 1, bluefire);
 				}
 			}
 			if (hands) {
 				if (!player.isSneaking()) {
-					Methods.playFireBall(GeneralMethods.getRightSide(ploc.clone().add(0,1.2,0), 0.2), 0.5, 4, 5, bluefire);
-					Methods.playFireBall(GeneralMethods.getLeftSide(ploc.clone().add(0,1.2,0), 0.2), 0.5, 4, 5, bluefire);
+					Methods.playFireBall(GeneralMethods.getRightSide(ploc.clone().add(0,1.2,0), 0.2), 0.5, 4, 1, bluefire);
+					Methods.playFireBall(GeneralMethods.getLeftSide(ploc.clone().add(0,1.2,0), 0.2), 0.5, 4, 1, bluefire);
 				}
 				if (player.isSneaking()) {
-					Methods.playFireBall(GeneralMethods.getRightSide(ploc.clone().add(dir.clone().multiply(1.2)), 0.2), 0.5, 4, 5, bluefire);
-					Methods.playFireBall(GeneralMethods.getLeftSide(ploc.clone().add(dir.clone().multiply(1.2)), 0.2), 0.5, 4, 5, bluefire);
+					Methods.playFireBall(GeneralMethods.getRightSide(ploc.clone().add(dir.clone().multiply(1.2)), 0.2), 0.5, 4, 1, bluefire);
+					Methods.playFireBall(GeneralMethods.getLeftSide(ploc.clone().add(dir.clone().multiply(1.2)), 0.2), 0.5, 4, 1, bluefire);
 				}
 			}
 		}
 		else {
 			if (feet) {
-				Methods.playFireBall(GeneralMethods.getRightSide(ploc, 0.2), 0.5, 4, 5, bluefire);
-				Methods.playFireBall(GeneralMethods.getLeftSide(ploc, 0.2), 0.5, 4, 5, bluefire);
+				Methods.playFireBall(GeneralMethods.getRightSide(ploc, 0.2), 0.5, 4, 1, bluefire);
+				Methods.playFireBall(GeneralMethods.getLeftSide(ploc, 0.2), 0.5, 4, 1, bluefire);
 			}
 			if (hands) {
-				Methods.playFireBall(GeneralMethods.getRightSide(ploc.clone().add(0,1,0), 0.2), 0.5, 4, 5, bluefire);
-				Methods.playFireBall(GeneralMethods.getLeftSide(ploc.clone().add(0,1,0), 0.2), 0.5, 4, 5, bluefire);
+				Methods.playFireBall(GeneralMethods.getRightSide(ploc.clone().add(0,1,0), 0.2), 0.5, 4, 1, bluefire);
+				Methods.playFireBall(GeneralMethods.getLeftSide(ploc.clone().add(0,1,0), 0.2), 0.5, 4, 1, bluefire);
 			}
 		}
 	}
@@ -280,27 +279,16 @@ public class DragonsJet extends FireAbility{
 		}
 	}
 
-	public void onRightClick() {
-		if (player.isSneaking()) {
-			player.getWorld().playSound(playerloc, Sound.ENTITY_GENERIC_EXPLODE, 2, 0);
-			ParticleEffect.EXPLOSION_NORMAL.display(playerloc, 4, 0.2, 0.1, 0.2);
-			ParticleEffect.ASH.display(playerloc, 10, 0.5, 0.1, 0.5);
-			if (bluefire) {
-				ParticleEffect.SOUL_FIRE_FLAME.display(playerloc, 20, 1, 0.1, 1);
-			}
-			else {
-				ParticleEffect.FLAME.display(playerloc, 20, 1, 0.1, 1);
-			}
-			
-			this.dragonsjetstate = jetstate.LEAP;
-			
-			player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(ChatColor.DARK_RED  + "Leap"));
-			manaleft -= manauseleap;
-			player.setVelocity(dir.clone().multiply(-1).multiply(leapspeed));
-		}
-		return;
-	}
 
+	public void onRightClick() {
+		Methods.playExplosion(playerloc, 2.0, 0, false);
+		player.setVelocity(new Vector (0,1,0).multiply(leapspeed));
+		this.dragonsjetstate = jetstate.LEAP;
+		
+		player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(ChatColor.DARK_RED  + "Leap"));
+		manaleft -= manauseleap;
+		
+	}
 
 
 

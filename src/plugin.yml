@@ -1,6 +1,6 @@
 name: Dragon
 version: 1.0
-api-version: 1.16
+api-version: 1.18
 main: me.yujiro.dragon.Dragon
 depend: [ProjectKorra]
 authors: [Yujiro]
@@ -11,3 +11,7 @@ dragon.player:
     children:
       bending.ability.DragonsBreath: true
       bending.ability.DragonsJet: true
+      bending.ability.DragonsComet: true
+      bending.ability.DragonsScales: true
+      bending.ability.DragonsBolt: true
+      bending.ability.DragonsSlam: true

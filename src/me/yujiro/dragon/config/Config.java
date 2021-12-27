@@ -38,8 +38,8 @@ public class Config {
 		config.addDefault("Dragon.DragonsBreath.Duration", Long.valueOf(10000));
 		config.addDefault("Dragon.DragonsBreath.Damage", Double.valueOf(0.5));
 		config.addDefault("Dragon.DragonsBreath.Speed", Double.valueOf(1));
-		config.addDefault("Dragon.DragonsBreath.Range", Double.valueOf(20.0));
-		config.addDefault("Dragon.DragonsBreath.FireHelixes", Integer.valueOf(3));
+		config.addDefault("Dragon.DragonsBreath.Range", Double.valueOf(8.0));
+		config.addDefault("Dragon.DragonsBreath.FireHelixes", Integer.valueOf(2));
 	
 		
 		config.addDefault("Dragon.DragonsJet.Cooldown", Long.valueOf(2000));
@@ -88,10 +88,10 @@ public class Config {
 		config.addDefault("Dragon.DragonsSlam.MaxRadius", Double.valueOf(15.0));
 		
 		config.addDefault("Dragon.DragonsSlam.Speed", Double.valueOf(1));
-		config.addDefault("Dragon.DragonsSlam.AngleIncrement", Double.valueOf(20));
+		config.addDefault("Dragon.DragonsSlam.AngleIncrement", Double.valueOf(50));
 		config.addDefault("Dragon.DragonsSlam.Damage", Double.valueOf(2.5));
 		config.addDefault("Dragon.DragonsSlam.JumpHeight", Double.valueOf(1.0));
-		config.addDefault("Dragon.DragonsSlam.Hitbox", Double.valueOf(0.1));
+		config.addDefault("Dragon.DragonsSlam.Hitbox", Double.valueOf(0.5));
 
 
 		config.addDefault("Dragon.DragonsBolt.Cooldown", Long.valueOf(2000));
