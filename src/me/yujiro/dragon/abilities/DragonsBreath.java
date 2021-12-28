@@ -34,7 +34,6 @@ public class DragonsBreath extends FireAbility{
 	private long duration;
 	private double damage;
 	private double range;
-	private double speed;
 	private int firehelixes;
 
 
@@ -71,7 +70,6 @@ public class DragonsBreath extends FireAbility{
 		this.chargetime = Dragon.plugin.getConfig().getLong("Dragon.DragonsBreath.ChargeTime");
 		this.duration = Dragon.plugin.getConfig().getLong("Dragon.DragonsBreath.Duration");
 		this.damage = Dragon.plugin.getConfig().getDouble("Dragon.DragonsBreath.Damage");
-		this.speed = Dragon.plugin.getConfig().getDouble("Dragon.DragonsBreath.Speed");
 		this.range = Dragon.plugin.getConfig().getDouble("Dragon.DragonsBreath.Range");
 		this.firehelixes = Dragon.plugin.getConfig().getInt("Dragon.DragonsBreath.FireHelixes");
 

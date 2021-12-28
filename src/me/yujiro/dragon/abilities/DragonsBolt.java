@@ -228,7 +228,7 @@ public class DragonsBolt extends LightningAbility{
 
 	@Override
 	public String getInstructions() {
-		return "Left click to fire."; 
+		return "Left click to fire or hold shift to absorb, and if off cooldown - fire back."; 
 	}
 
 

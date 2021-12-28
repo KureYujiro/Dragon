@@ -142,7 +142,7 @@ public class DragonsComet extends FireAbility{
 			
 			for (double theta = 0; theta < 360; theta += 5){
 				Vector zpositive = new Vector (0,0,chargeradius);
-				Location temploc = loc.clone().add(zpositive.clone().rotateAroundY(Math.toRadians(theta))).add(0, Math.cos(Math.toRadians(theta * 4)), 0);
+				Location temploc = loc.clone().add(zpositive.clone().rotateAroundY(Math.toRadians(theta))).add(0, Math.cos(Math.toRadians(theta * 4)), 0).add(0,1,0);
 				if (!hasbluefire) {
 					ParticleEffect.FLAME.display(temploc, 3, 0.1, 0.3, 0.1);
 				}
