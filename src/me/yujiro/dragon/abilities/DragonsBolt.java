@@ -43,7 +43,7 @@ public class DragonsBolt extends LightningAbility{
 	public DragonsBolt(Player player) {
 		super(player);
 
-		if (CoreAbility.hasAbility(player, this.getClass()) || bPlayer.isOnCooldown(this) || GeneralMethods.isRegionProtectedFromBuild(this, player.getLocation())) {
+		if (!bPlayer.canBend(this) || CoreAbility.hasAbility(player, this.getClass()) || bPlayer.isOnCooldown(this) || GeneralMethods.isRegionProtectedFromBuild(this, player.getLocation())) {
 			return;
 		}
 
